@@ -288,6 +288,7 @@ app.delete("/homework/:hid/:classid",async (req,res)=>{
 })
 const letstry=async ()=>{
     const teachers=await Teacher.find({});
+    
     try{
     for (let i=0 ;i<teachers.length;i++){
         let teacher=teachers[i];
@@ -303,6 +304,7 @@ const letstry=async ()=>{
             teacherId:teacher._id,
 
         })
+        
 
        const registerdUser=await User.register(newUser,Password);
      //console.log(registerdUser);

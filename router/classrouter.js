@@ -2,6 +2,7 @@ const express=require('express');
 const router=express.Router();
 const ClassModel=require('../models/classmodel.js');
 const Student=require('../models/studentmodel.js');
+const User=require('../models/usermodel.js')
 const mongoose=require('mongoose');
 const controlllers=require('../controllers/class.js');
 const flash=require('connect-flash');
@@ -61,10 +62,18 @@ router.post("/:id/newstudent",async (req,res)=>{
     }
     let {id}=req.params;
    
-    let {name,rollNo,age,gender,address,fathername,mothername,dateOfBirth,parentcontact,grade}=req.body;
+    let {name,rollNo,age,gender,address,fathername,mothername,dateOfBirth,parentcontact,grade,password, username , email}=req.body;
    // console.log(gender);
    let className=id;
-    let newstudent=await Student.insertOne({id:id,name:name,rollNo:rollNo,age:age,gender:gender,address:address,fathername:fathername,mothername:mothername,dateOfBirth:dateOfBirth,parentcontact:parentcontact,grade:grade,className:className});
+    let newstudent=await Student.insertOne({id:id,name:name,rollNo:rollNo,age:age,gender:gender,address:address,fathername:fathername,mothername:mothername,dateOfBirth:dateOfBirth,parentcontact:parentcontact,grade:grade,className:className,password:password,email:email,username:username});
+    const newUser=new User({
+        username:username,
+       role:'student',
+        email:email,
+        studentId:newstudent._id,
+
+    })
+    let reg=await User.register(newUser,password);
  //   console.log(newstudent);
   //  console.log(id);
         res.redirect(`/class/${id}/students`);

@@ -36,6 +36,16 @@ const schema=new mongoose.Schema({
     Dateofjoining:{
         type:String,
     },
+    username:{
+        type:String,
+        required:true,
+
+    },
+    password:{
+        type:String,
+        required:true,
+    },
+    
 
     
 
