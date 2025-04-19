@@ -69,30 +69,30 @@ const upload=multer({storage});
 
 
 //models
-const ClassModel=require("../backend/models/classmodel");
-const Student =require("../backend/models/studentmodel.js");
-const Teacher=require("../backend/models/teachermodel.js");
-const Driver=require("../backend/models/drivermodel.js");
-const User=require("../backend/models/usermodel.js");
-const Notice=require("../backend/models/noticemodel.js");
-const Image=require("../backend/models/gallerymodel.js");
-const Homework=require("../backend/models/homeworkmodel.js");
+const ClassModel=require("./models/classmodel.js");
+const Student =require("./models/studentmodel.js");
+const Teacher=require("./models/teachermodel.js");
+const Driver=require("./models/drivermodel.js");
+const User=require("./models/usermodel.js");
+const Notice=require("./models/noticemodel.js");
+const Image=require("./models/gallerymodel.js");
+const Homework=require("./models/homeworkmodel.js");
 
 //data 
-const classdata = require("../backend/data/classdata.js");
+const classdata = require("./data/classdata.js");
 //const ukgdata=require("../backend/data/classstudent.js");
-const teacherdata=require("../backend/data/teacherdata.js");
+const teacherdata=require("../b/data/teacherdata.js");
 const driverdata=require("../backend/data/driverdata.js");
-const Class = require('../backend/models/classmodel');
+const Class = require('./models/classmodel.js');
 passport.use(new LocalStrategy(User.authenticate()));
 
 //routers
-const classRouter=require("../backend/router/classrouter.js");
-const teacherRouter=require("../backend/router/teacherrouter.js");
-const studentRouter=require("../backend/router/studentrouter.js");
-const driverRouter=require("../backend/router/supportrouter.js");
-const userRouter=require('../backend/router/userroute.js');
-const noticeRouter=require('../backend/router/noticerouter.js');
+const classRouter=require("./router/classrouter.js");
+const teacherRouter=require("./router/teacherrouter.js");
+const studentRouter=require("./router/studentrouter.js");
+const driverRouter=require("./router/supportrouter.js");
+const userRouter=require('./router/userroute.js');
+const noticeRouter=require('./router/noticerouter.js');
 
 //mongodb coonnect
 const start = async () => {
