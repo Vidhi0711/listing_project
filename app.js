@@ -79,10 +79,10 @@ const Image=require("./models/gallerymodel.js");
 const Homework=require("./models/homeworkmodel.js");
 
 //data 
-const classdata = require("./data/classdata.js");
+//const classdata = require("./data/classdata.js");
 //const ukgdata=require("../backend/data/classstudent.js");
-const teacherdata=require("../b/data/teacherdata.js");
-const driverdata=require("../backend/data/driverdata.js");
+//const teacherdata=require("../b/data/teacherdata.js");
+//const driverdata=require("../backend/data/driverdata.js");
 const Class = require('./models/classmodel.js');
 passport.use(new LocalStrategy(User.authenticate()));
 
