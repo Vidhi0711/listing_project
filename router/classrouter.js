@@ -86,11 +86,7 @@ router.get("/:id/students",async (req,res)=>{
         req.flash("error","you must be logged in to do that");
         return res.redirect("/user/login");
     }
-    if (req.user.role!="admin"){
-        req.flash("error","you are not admin take permission from the admin");
-        return res.redirect("/user/login");
-        
-    }
+   
   let {id}=req.params;
   const students = await Student.find({ className: new mongoose.Types.ObjectId(id) });
   const Class=    await ClassModel.findById(id);
