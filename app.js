@@ -179,9 +179,25 @@ app.get("/school/gallery", async (req,res)=>{
     
 })
 app.get("/school/gallery/upload",async (req,res)=>{
+    if (!req.isAuthenticated()){
+        req.flash('error',"You must be logged in to add homework");
+        return res.redirect('/user/login');
+    }
+    if (req.user.role=='student'){
+        req.flash('error', 'you must be logged in as a admin or teacher');
+        return res.redirect('/user/login');
+    }
     res.render('../views/newphoto.ejs');
 })
 app.post("/gallery/upload",upload.single("image"), async (req,res)=>{
+    if (!req.isAuthenticated()){
+        req.flash('error',"You must be logged in to add homework");
+        return res.redirect('/user/login');
+    }
+    if (req.user.role=='student'){
+        req.flash('error', 'you must be logged in as a admin or teacher');
+        return res.redirect('/user/login');
+    }
     try{
         console.log("request coming");
         if (!req.file) {
@@ -253,6 +269,10 @@ app.get("/homework/:classid/addhomework", async (req,res)=>{
         req.flash('error',"You must be logged in to add homework");
         return res.redirect('/user/login');
     }
+    if (req.user.role=='student'){
+        req.flash('error', 'you must be logged in as a admin or teacher');
+        return res.redirect('/user/login');
+    }
     let {classid}=req.params;
     res.render('../views/addhomework.ejs',{classid});
 
@@ -260,6 +280,10 @@ app.get("/homework/:classid/addhomework", async (req,res)=>{
 app.post("/homework/:classid/addhomework",async (req,res)=>{
     if (!req.isAuthenticated()){
         req.flash('error',"You must be logged in to add homework");
+        return res.redirect('/user/login');
+    }
+    if (req.user.role=='student'){
+        req.flash('error', 'you must be logged in as a admin or teacher');
         return res.redirect('/user/login');
     }
     let {classid}=req.params;
@@ -274,6 +298,10 @@ app.post("/homework/:classid/addhomework",async (req,res)=>{
 app.delete("/homework/:hid/:classid",async (req,res)=>{
     if (!req.isAuthenticated()){
         req.flash('error',"You must be logged in to add homework");
+        return res.redirect('/user/login');
+    }
+    if (req.user.role=='student'){
+        req.flash('error', 'you must be logged in as a admin or teacher');
         return res.redirect('/user/login');
     }
     try{

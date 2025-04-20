@@ -6,7 +6,21 @@ const Student=require('../models/studentmodel.js');
 const mongoose=require('mongoose');
 
 router.get("/:studentid/details",async (req,res)=>{
+     if (!req.isAuthenticated()){
+            req.flash('error',"You must be logged in to add homework");
+            return res.redirect('/user/login');
+        }
     let {studentid}=req.params;
+
+        if (req.user.role=='student'){
+
+            let cuser=req.user;
+            if (cuser.studentId!=studentid){
+            req.flash('error', 'you must be logged in as a same student  or teacher or admin ');
+            return res.redirect('/user/login');}
+            
+        }
+
     const student = await Student.findById(studentid);
     res.render("../views/studentdetail.ejs",{student});
 
